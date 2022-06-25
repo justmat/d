@@ -10,7 +10,7 @@ d is for distortion, decimation, and destruction... or whatever
 
 ## what's happening?
 
-d is made up of two parts: an engine providing bit crushing and sample rate reduction as well as tape style distortion/saturation, and a randomized control matrix.
+**d** is made up of two parts: an engine providing bit crushing and sample rate reduction as well as tape style distortion/saturation, and a randomized control matrix.
 
 the main screen is a lot to take in at first, but is pretty simple once you're in the know. size and brightness of screen elements reflect the state of the engine. the elements are:
 * sr - sample rate
@@ -27,7 +27,7 @@ turn **encoders 1/2/3** to change the engine parameters in varying amounts, acco
 
 ![d](assets/matrix-m.png)
 
-each time you launch d the control matrix is randomized, so **encoders 1/2/3** won't always react the same way. this adds lots of variation in the sounds produced and leads one to find **sweetspots**. learn how to save and recall **sweetspots** below.
+each time you launch **d** the control matrix is randomized, so **encoders 1/2/3** won't always react the same way. this adds lots of variation in the sounds produced and leads one to find **sweetspots**. learn how to save and recall **sweetspots** below.
 
 in addition to the encoders and matrix, you can also perform some special actions using the norns keys.
 
