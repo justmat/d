@@ -23,8 +23,10 @@ for i = 1, 3 do
 end
 
 sweetspots = {}
+
 for i = 1, 2 do
   sweetspots[i] = {nil}
+  sweetspots[i].has_data = false
 end
 
 command = ""
@@ -59,25 +61,13 @@ function process_command(n)
       for i = 1, 7 do
         sweetspots[1][i] = params:get(gfx.param_ids[i])
       end
+      sweetspots[1].has_data = true
     elseif n == "2323" then
       -- set sweetspot 2
       for i = 1, 7 do
         sweetspots[2][i] = params:get(gfx.param_ids[i])
       end
-    elseif n == "2332" then
-      -- recall sweetspot 1
-      if not sweetspots[1] == nil then
-        for i = 1, 7 do
-          params:set(gfx.param_ids[i], sweetspots[1][i])
-        end
-      end
-    elseif n == "2333" then
-      -- recall sweetspot 2
-      if not sweetspots[1] == nil then
-        for i = 1, 7 do
-          params:set(gfx.param_ids[i], sweetspots[2][i])
-        end
-      end
+      sweetspots[2].has_data = true
     elseif n == "3322" then
       page = 1
     elseif n == "3323" then
@@ -173,6 +163,23 @@ function key(n, z)
       build_command("3")
     end
   else
+    if n == 2 and z == 1 then
+      print("wtf")
+     -- recall sweetspot 1
+      if sweetspots[1].has_data == true then
+        print("hello")
+        for i = 1, 7 do
+          params:set(gfx.param_ids[i], sweetspots[1][i])
+        end
+      end
+    elseif n == 3 and z == 1 then
+       -- recall sweetspot 1
+      if sweetspots[2].has_data == true then
+        for i = 1, 7 do
+          params:set(gfx.param_ids[i], sweetspots[2][i])
+        end
+      end
+    end
     process_command(command)
   end
 end
