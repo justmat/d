@@ -2,7 +2,8 @@
 d is for distortion, decimation, and destruction.. or whatever
 
 ### nice numbers
-the first two numbers are the same for related commands
+the first two numbers are the same for related commands:
+
 (22 - reset)
 * 2222 - reset decimator
 * 2223 - reset distortion
