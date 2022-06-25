@@ -8,7 +8,7 @@ d is for distortion, decimation, and destruction... or whatever
 * twist encoders until it sounds awful, or awesome
 
 note: the size and brightness of screen elements reflect the state of the engine
-* st - sample rate
+* sr - sample rate
 * bd - bit depth
 * sat - saturation/distortion
 * co - crossover freqency
