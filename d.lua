@@ -56,6 +56,11 @@ function process_command(n)
         params:set("lb" .. i, math.random(-100, 100))
         params:set("hs" .. i, math.random(-100, 100))
       end
+     elseif n == "2233" then
+      for i = 1, 2 do
+        sweetspots[i] = {nil}
+        sweetspots[i].has_data = false
+       end
     elseif n == "2322" then
       -- set sweetspot 1
       for i = 1, 7 do
