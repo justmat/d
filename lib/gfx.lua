@@ -168,8 +168,8 @@ end
 
 
 function d.draw_command()
-  screen.move(0, 0)
-  screen.rect(0, 0, 127, 64)
+  screen.move(0, 20)
+  screen.rect(0, 12, 127, 45)
   screen.level(1)
   screen.blend_mode(5)
   screen.fill()
@@ -177,13 +177,13 @@ function d.draw_command()
   
   screen.blend_mode(0)
   screen.font_face(14)
-  screen.move(68, 60)
+  screen.move(68, 55)
   screen.level(0)
-  screen.font_size(64)
+  screen.font_size(52)
   screen.text_center(command)
-  screen.move(64, 57)
+  screen.move(64, 52)
   screen.level(16)
-  screen.font_size(64)
+  screen.font_size(52)
   screen.text_center(command)
 end
 
