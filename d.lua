@@ -20,7 +20,9 @@ for i = 1, 3 do
   }
 end
 
-param_ids = {
+local data = {}
+
+data.param_ids = {
   "sample_rate",
   "bit_depth",
   "saturation",
@@ -30,7 +32,7 @@ param_ids = {
   "hiss"
 }
 
-param_shorts = {
+data.param_shorts = {
   "sr",
   "bd",
   "sat",
@@ -40,25 +42,25 @@ param_shorts = {
   "hs"
 }
 
-bullshit = {}
-bullshit.x = {
+data.bullshit = {}
+data.bullshit.x = {
   0,
   35,
   75,
-  0,
+  5,
   32,
-  65,
-  92
+  60,
+  82
 }
 
-bullshit.y = {
+data.bullshit.y = {
   30,
   33,
   28,
   60,
   55,
-  60,
-  58
+  62,
+  50
 }
 
 
@@ -70,29 +72,30 @@ end
 
 function process_command(n)
   if #n == 4 then
-    if n == "2222" then
+    if n == "2223" then
       params:set("sample_rate", 48000)
       params:set("bit_depth", 32)
-    elseif n == "3333" then
+    elseif n == "2232" then
       params:set("saturation", 5)
       params:set("crossover", 2000)
-      params:set("highbias", 0.004)
+      params:set("highbias", 0.14)
+      params:set("lowbias", 0.01)
       params:set("hiss", 0.001)
-    elseif n == "2333" then
+    elseif n == "2322" then
       for i = 1, 3 do
         params:set("sr" .. i, math.random(-100, 100))
         params:set("bd" .. i, math.random(-100, 100))
         params:set("sat" .. i, math.random(-100, 100))
         params:set("co" .. i, math.random(-100,100))
-        params:set("h" .. i, math.random(-100, 100))
-        params:set("l" .. i, math.random(-100, 100))
+        params:set("hb" .. i, math.random(-100, 100))
+        params:set("lb" .. i, math.random(-100, 100))
         params:set("hs" .. i, math.random(-100, 100))
       end
-    elseif n == "2233" then
+    elseif n == "3332" then
       page = 2
-    elseif n == "2323" then
+    elseif n == "3323" then
       page = 3
-    elseif n == "3322" then
+    elseif n == "3233" then
       page = 1
     end
   end
@@ -111,7 +114,7 @@ function init()
   params:add_control("saturation", "saturation", controlspec.new(10, 500, "exp", 1, 15, '', 0.01, false))
   params:set_action("saturation", function(x) engine.distAmount(x) end)
   -- crossover filter
-  params:add_control("crossover", "crossover", controlspec.new(50, 10000, "lin", 10, 2000, '', 0.01, true))
+  params:add_control("crossover", "crossover", controlspec.new(50, 10000, "lin", 10, 2000, '', 0.01, false))
   params:set_action("crossover", function(x) engine.crossover(x) end)
   -- bias
   params:add_control("highbias", "highbias", controlspec.new(0.001, 1, "lin", 0.001, 0.12, '', 0.01, false))
@@ -216,7 +219,7 @@ function draw_matrix()
   screen.move(12, 7)
   screen.line(12, 64)
   screen.stroke()
-  
+
   screen.move(16, 20)
   screen.text(params:get("sr1"))
   screen.move(36, 20)
@@ -292,22 +295,36 @@ end
 
 function draw_bullshit()
   for i = 1, 7 do
-    screen.move(bullshit.x[i], bullshit.y[i])
+    screen.move(data.bullshit.x[i], data.bullshit.y[i])
     screen.font_face(math.random(1, 56))
-    screen.font_size(get_size_level(param_ids[i])[1])
-    screen.level(get_size_level(param_ids[i])[2])
-    screen.text(param_shorts[i])
+    screen.font_size(get_size_level(data.param_ids[i])[1])
+    screen.level(get_size_level(data.param_ids[i])[2])
+    if i == 4 then
+      screen.text_rotate(data.bullshit.x[i], data.bullshit.y[i], data.param_shorts[i], -15)
+    elseif i == 7 then
+      screen.text_rotate(data.bullshit.x[i], data.bullshit.y[i], data.param_shorts[i], 15)
+    else
+      screen.text(data.param_shorts[i])
+    end
   end
 end
 
 
 function draw_command()
+  screen.move(0, 0)
+  screen.rect(0, 0, 127, 64)
+  screen.level(1)
+  screen.blend_mode(5)
+  screen.fill()
+  screen.stroke()
+  
+  screen.blend_mode(0)
   screen.font_face(14)
-  screen.move(66, 52)
+  screen.move(68, 60)
   screen.level(0)
-  screen.font_size(66)
+  screen.font_size(64)
   screen.text_center(command)
-  screen.move(64, 50)
+  screen.move(64, 57)
   screen.level(16)
   screen.font_size(64)
   screen.text_center(command)
@@ -316,6 +333,7 @@ end
 
 function redraw()
   screen.aa(0)
+  screen.blend_mode(0)
   screen.clear()
   screen.level(16)
   screen.font_face(25)
@@ -328,6 +346,6 @@ function redraw()
   elseif page == 3 then
     draw_matrix()
   end
-  draw_command()
+  if alt then draw_command() end
   screen.update()
 end
