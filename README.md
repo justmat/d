@@ -1,5 +1,5 @@
 # d
-![d](assets/d1-m.png)
+![d](assets/d.gif)
 
 d is for distortion, decimation, and destruction.. or whatever
 
