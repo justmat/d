@@ -47,10 +47,7 @@ note, the first two numbers are the same for related commands:
 (23 - set sweetspots)
 * 2322 - set sweetspot 1
 * 2323 - set sweetspot 2
-
-(32 - recall sweetspots) -- this is going to change. we'll use keys 2/3 (without a modifier or mode) to recall sweetspots 1/2
-* 3222 - recall sweetspot 1
-* 3223 - recall sweetspot 2
+  * recall **sweetspots 1/2** with **key 2/3**
 
 (33 - change screen view)
 * 3322 - main/home screen
