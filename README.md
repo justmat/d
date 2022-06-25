@@ -7,6 +7,15 @@ d is for distortion, decimation, and destruction... or whatever
 * put nice sound in
 * twist knobs until it sounds awful, or awesome
 
+note: the size and brightness of screen elements reflect the state of the engine
+* st - sample rate
+* bd - bit depth
+* sat - saturation/distortion
+* co - crossover freqency
+* hb - highbias
+* lb - lowbias
+* hs - tape hiss
+
 
 ## what's happening?
 
