@@ -25,8 +25,8 @@ d.param_shorts = {
   "hs"
 }
 
-d.bullshit = {}
-d.bullshit.x = {
+bullshit = {}
+bullshit.x = {
   0,
   35,
   75,
@@ -36,7 +36,7 @@ d.bullshit.x = {
   82
 }
 
-d.bullshit.y = {
+bullshit.y = {
   30,
   33,
   28,
@@ -152,14 +152,14 @@ end
 
 function d.draw_bullshit()
   for i = 1, 7 do
-    screen.move(d.bullshit.x[i], d.bullshit.y[i])
+    screen.move(bullshit.x[i], bullshit.y[i])
     screen.font_face(math.random(1, 56))
     screen.font_size(get_size_level(d.param_ids[i])[1])
     screen.level(get_size_level(d.param_ids[i])[2])
     if i == 4 then
-      screen.text_rotate(d.bullshit.x[i], d.bullshit.y[i], d.param_shorts[i], -15)
+      screen.text_rotate(bullshit.x[i], bullshit.y[i], d.param_shorts[i], -15)
     elseif i == 7 then
-      screen.text_rotate(d.bullshit.x[i], d.bullshit.y[i], d.param_shorts[i], 15)
+      screen.text_rotate(bullshit.x[i], bullshit.y[i], d.param_shorts[i], 15)
     else
       screen.text(d.param_shorts[i])
     end

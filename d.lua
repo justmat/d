@@ -58,6 +58,7 @@ function process_command(n)
       page = 1
     end
   end
+  command = ""
 end
 
 
@@ -145,7 +146,6 @@ function key(n, z)
     end
   else
     process_command(command)
-    command = ""
   end
 end
 
@@ -165,6 +165,6 @@ function redraw()
   elseif page == 3 then
     gfx.draw_matrix()
   end
-  if alt then draw_command() end
+  if alt then gfx.draw_command() end
   screen.update()
 end
