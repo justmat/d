@@ -161,7 +161,6 @@ function key(n, z)
   if n == 1 then alt = z == 1 and true or false end
   
   if alt then
-    -- add key presses to a string 4 chars long
     if n == 2 and z == 1 then
       build_command("2")
     elseif n == 3 and z == 1 then
@@ -169,16 +168,14 @@ function key(n, z)
     end
   else
     if n == 2 and z == 1 then
-      print("wtf")
      -- recall sweetspot 1
       if sweetspots[1].has_data == true then
-        print("hello")
         for i = 1, 7 do
           params:set(gfx.param_ids[i], sweetspots[1][i])
         end
       end
     elseif n == 3 and z == 1 then
-       -- recall sweetspot 1
+       -- recall sweetspot 2
       if sweetspots[2].has_data == true then
         for i = 1, 7 do
           params:set(gfx.param_ids[i], sweetspots[2][i])
