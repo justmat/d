@@ -21,7 +21,7 @@ the main screen is a lot to take in at first, but is pretty simple once you're i
 * lb - lowbias
 * hs - tape hiss
 
-turn **encoders 1/2/3** to change the engine parameters in varying amounts, according to the control matrix:
+turn **encoders 1/2/3** to change the engine parameters in varying amounts, according to the control matrix.
 
 ### the matrix
 
