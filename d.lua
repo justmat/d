@@ -138,9 +138,9 @@ function init()
   end
 
 
-  --for i = pcount, params.count do
-    --params:hide(i)
-  --end
+  for i = pcount, params.count do
+    params:hide(i)
+  end
 
   params:bang()
 
