@@ -42,7 +42,8 @@ note, the first two numbers are the same for related commands:
 (22 - reset)
 * 2222 - reset decimator
 * 2223 - reset distortion
-* 2232 - reset control matrix
+* 2232 - reset/re-roll control matrix
+* 2233 - reset/clear sweetspots
 
 (23 - set sweetspots)
 * 2322 - set sweetspot 1
