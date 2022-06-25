@@ -5,7 +5,7 @@ d is for distortion, decimation, and destruction... or whatever
 
 ### quick start
 * put nice sound in
-* twist knobs until it sounds awful, or awesome
+* twist encoders until it sounds awful, or awesome
 
 note: the size and brightness of screen elements reflect the state of the engine
 * st - sample rate
