@@ -5,6 +5,8 @@
 
 engine.name = 'D'
 
+local m = midi.connect()
+
 local gfx = include("lib/gfx")
 local alt = false
 local page = 1
@@ -84,8 +86,36 @@ function process_command(n)
 end
 
 
+local function midi_control(data)
+  local msg = midi.to_msg(data)
+  if msg.type == "note_on" then
+    -- do nothing
+  elseif msg.type == "note_off" then
+    -- do more nothing
+  elseif msg.type == "cc" then
+    if msg.cc == 50 then
+      params:set("sample_rate", util.linlin(0, 127, 2000, 48000, msg.val))
+    elseif msg.cc == 51 then
+      params:set("bit_depth", util.linlin(0, 127, 1, 32, msg.val))
+    elseif msg.cc == 52 then
+      params:set("saturation", util.linlin(0, 127, 10, 500, msg.val))
+    elseif msg.cc == 53 then
+      params:set("crossover", util.linlin(0, 127, 50, 10000, msg.val))
+    elseif msg.cc == 54 then
+      params:set("highbias", util.linlin(0, 127, 0.001, 1.0, msg.val))
+    elseif msg.cc == 55 then
+      params:set("lowbias", util.linlin(0, 127, 0.001, 1.0, msg.val))
+    elseif msg.cc == 56 then
+      params:set("hiss", util.linlin(0, 127, 0, 10, msg.val))
+    end
+  end
+end
+
+
 function init()
   local pcount = params.count + 1
+  m.event = midi_control
+
   -- sample rate
   params:add_control("sample_rate", "sample rate", controlspec.new(2000, 48000, "exp", 1, 48000, '', 0.001, false))
   params:set_action("sample_rate", function(x) engine.srate(x) end)
@@ -159,21 +189,21 @@ function key(n, z)
   if n == 1 then alt = z == 1 and true or false end
   
   if alt then
+    -- command mode: use keys 2/3 to input numbers
     if n == 2 and z == 1 then
       build_command("2")
     elseif n == 3 and z == 1 then
       build_command("3")
     end
   else
+    -- normal mode: use keys 2/3 recall parameter snapshots/sweetspots
     if n == 2 and z == 1 then
-     -- recall sweetspot 1
       if sweetspots[1].has_data == true then
         for i = 1, 7 do
           params:set(gfx.param_ids[i], sweetspots[1][i])
         end
       end
     elseif n == 3 and z == 1 then
-       -- recall sweetspot 2
       if sweetspots[2].has_data == true then
         for i = 1, 7 do
           params:set(gfx.param_ids[i], sweetspots[2][i])
