@@ -54,3 +54,15 @@ note, the first two numbers are the same for related commands:
 * 3322 - main/home screen
 * 3323 - show engine parameter values
 * 3332 - show the control matrix
+
+## midi
+
+**d** accepts midi input on the following cc's:
+
+* cc 50 - sample rate
+* cc 51 - bit depth
+* cc 52 - saturation/distortion
+* cc 53 - crossover frequency
+* cc 54 - highbias
+* cc 55 - lowbias
+* cc 56 - tape hiss amount
