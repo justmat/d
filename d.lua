@@ -23,7 +23,6 @@ for i = 1, 3 do
 end
 
 sweetspots = {}
-
 for i = 1, 2 do
   sweetspots[i] = {nil}
   sweetspots[i].has_data = false
@@ -131,7 +130,6 @@ function init()
     params:add_number("hs" .. i, "hs" .. i, -100, 100, math.random(-100, 100))
     params:set_action("hs" .. i, function(v) matrix[i].hs = v end)
   end
-
 
   for i = pcount, params.count do
     params:hide(i)
