@@ -29,7 +29,7 @@ turn **encoders 1/2/3** to change the engine parameters in varying amounts, acco
 
 each time you launch **d** the control matrix is randomized, so **encoders 1/2/3** won't always react the same way. this adds lots of variation in the sounds produced and leads one to find **sweetspots**. learn how to save and recall **sweetspots** below.
 
-in addition to the encoders and matrix, you can also perform some special actions using the norns keys.
+in addition to the encoders and matrix, you can perform some special actions using the norns keys.
 
 ### nice numbers
 
