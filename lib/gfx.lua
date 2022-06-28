@@ -133,16 +133,18 @@ end
 function d.draw_engine()
   screen.move(3, 5)
   screen.text("sample rate: " .. params:get("sample_rate"))
-  screen.move(3, 15)
+  screen.move(3, 14)
   screen.text("bit depth: ".. params:get("bit_depth"))
-  screen.move(3, 25)
+  screen.move(3, 23)
   screen.text("saturation: " .. params:get("saturation"))
-  screen.move(3, 35)
+  screen.move(3, 32)
   screen.text("crossover: " .. params:get("crossover"))
-  screen.move(3, 45)
+  screen.move(3, 41)
   screen.text("highbias: " .. params:get("highbias"))
-  screen.move(3, 55)
+  screen.move(3, 50)
   screen.text("lowbias: " .. params:get("lowbias"))
+  screen.move(3, 59)
+  screen.text("hiss: " .. params:get("hiss"))
 end
 
 
