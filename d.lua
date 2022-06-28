@@ -5,8 +5,6 @@
 
 engine.name = 'D'
 
-local m = midi.connect()
-
 local gfx = include("lib/gfx")
 local alt = false
 local page = 1
@@ -86,58 +84,10 @@ function process_command(n)
 end
 
 
-local function midi_control(data)
-  local msg = midi.to_msg(data)
-  if msg.type == "note_on" then
-    -- do nothing
-  elseif msg.type == "note_off" then
-    -- do more nothing
-  elseif msg.type == "cc" then
-    if msg.cc == 50 then
-      params:set("sample_rate", util.linlin(0, 127, 2000, 48000, msg.val))
-    elseif msg.cc == 51 then
-      params:set("bit_depth", util.linlin(0, 127, 1, 32, msg.val))
-    elseif msg.cc == 52 then
-      params:set("saturation", util.linlin(0, 127, 10, 500, msg.val))
-    elseif msg.cc == 53 then
-      params:set("crossover", util.linlin(0, 127, 50, 10000, msg.val))
-    elseif msg.cc == 54 then
-      params:set("highbias", util.linlin(0, 127, 0.001, 1.0, msg.val))
-    elseif msg.cc == 55 then
-      params:set("lowbias", util.linlin(0, 127, 0.001, 1.0, msg.val))
-    elseif msg.cc == 56 then
-      params:set("hiss", util.linlin(0, 127, 0, 10, msg.val))
-    end
-  end
-end
-
-
 function init()
   local pcount = params.count + 1
-  m.event = midi_control
-
-  -- sample rate
-  params:add_control("sample_rate", "sample rate", controlspec.new(2000, 48000, "exp", 1, 48000, '', 0.001, false))
-  params:set_action("sample_rate", function(x) engine.srate(x) end)
-  -- bit depth
-  params:add_control("bit_depth", "bit depth", controlspec.new(1, 32, "lin", 0, 32, '', 0.01, false))
-  params:set_action("bit_depth", function(x) engine.sdepth(x) end)
-  -- tape sat
-  params:add_control("saturation", "saturation", controlspec.new(10, 500, "exp", 1, 15, '', 0.01, false))
-  params:set_action("saturation", function(x) engine.distAmount(x) end)
-  -- crossover filter
-  params:add_control("crossover", "crossover", controlspec.new(50, 10000, "lin", 10, 2000, '', 0.01, false))
-  params:set_action("crossover", function(x) engine.crossover(x) end)
-  -- bias
-  params:add_control("highbias", "highbias", controlspec.new(0.001, 1, "lin", 0.001, 0.12, '', 0.01, false))
-  params:set_action("highbias", function(x) engine.highbias(x) end)
   
-  params:add_control("lowbias", "lowbias", controlspec.new(0.001, 1, "lin", 0.001, 0.04, '', 0.01, false))
-  params:set_action("lowbias", function(x) engine.lowbias(x) end)
-  -- tape hiss
-  params:add_control("hiss", "hiss", controlspec.new(0, 10, "lin", 0.01, 0.001, '', 0.01, true))
-  params:set_action("hiss", function(x) engine.hissAmount(x) end)
-  -- control matrix
+    -- control matrix
   for i = 1, 3 do
     params:add_number("sr" .. i, "sr" .. i, -100, 100, math.random(-100, 100))
     params:set_action("sr" .. i, function(v) matrix[i].sr = v end)
@@ -160,10 +110,33 @@ function init()
     params:add_number("hs" .. i, "hs" .. i, -100, 100, math.random(-100, 100))
     params:set_action("hs" .. i, function(v) matrix[i].hs = v end)
   end
-
+  -- hide the matrix
   for i = pcount, params.count do
     params:hide(i)
   end
+
+  params:add_separator("engine")
+  -- sample rate
+  params:add_control("sample_rate", "sample rate", controlspec.new(2000, 48000, "exp", 1, 48000, '', 0.001, false))
+  params:set_action("sample_rate", function(x) engine.srate(x) end)
+  -- bit depth
+  params:add_control("bit_depth", "bit depth", controlspec.new(1, 32, "lin", 0, 32, '', 0.01, false))
+  params:set_action("bit_depth", function(x) engine.sdepth(x) end)
+  -- tape sat
+  params:add_control("saturation", "saturation", controlspec.new(10, 500, "exp", 1, 15, '', 0.01, false))
+  params:set_action("saturation", function(x) engine.distAmount(x) end)
+  -- crossover filter
+  params:add_control("crossover", "crossover", controlspec.new(50, 10000, "lin", 10, 2000, '', 0.01, false))
+  params:set_action("crossover", function(x) engine.crossover(x) end)
+  -- bias
+  params:add_control("highbias", "highbias", controlspec.new(0.001, 1, "lin", 0.001, 0.12, '', 0.01, false))
+  params:set_action("highbias", function(x) engine.highbias(x) end)
+  
+  params:add_control("lowbias", "lowbias", controlspec.new(0.001, 1, "lin", 0.001, 0.04, '', 0.01, false))
+  params:set_action("lowbias", function(x) engine.lowbias(x) end)
+  -- tape hiss
+  params:add_control("hiss", "hiss", controlspec.new(0, 10, "lin", 0.01, 0.001, '', 0.01, true))
+  params:set_action("hiss", function(x) engine.hissAmount(x) end)
 
   params:bang()
 
